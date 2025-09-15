@@ -3,88 +3,94 @@
 
 <head>
     <title>Caesar Cipher</title>
-    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div id="heading-container">
-            <h1>CAESAR CIPHER</h1>
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">Caesar Cipher</h1>
         </div>
-        <div id="main-container">
-            <div class="box">
-                <div class="heading">
-                    <h2>Controls</h2>
-                </div>
-                <form id="controls">
-                    <div class="row">
-                        <div>
-                            <input type="radio" name="code" id="encode" value="encode" checked="checked" /><label
-                                for="encode">Encode</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="code" id="decode" value="decode" /><label
-                                for="decode">Decode</label>
-                        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Controls
                     </div>
-                    <div class="row">
-                        <div>
-                            <div>
-                                <span>Shift Key: </span><input type="text" name="shift" id="shift-input" maxlength="4"
-                                    size="4" value="3" />
+                    <div class="card-body">
+                        <form id="controls">
+                            <div class="mb-3">
+                                <label class="form-label">Operation</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="code" id="encode" value="encode"
+                                        checked>
+                                    <label class="form-check-label" for="encode">Encode</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="code" id="decode" value="decode">
+                                    <label class="form-check-label" for="decode">Decode</label>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div>
-                                <span>Modulo: </span><input type="text" name="mod" id="mod-input" maxlength="4" size="4"
-                                    value="36" />
+                            <div class="mb-3">
+                                <label for="shift-input" class="form-label">Shift Key</label>
+                                <input type="number" class="form-control" id="shift-input" value="3">
                             </div>
-                        </div>
+                            <div class="mb-3">
+                                <label for="mod-input" class="form-label">Modulo</label>
+                                <input type="number" class="form-control" id="mod-input" value="36">
+                            </div>
+                            <div class="mb-3">
+                                <label for="alphabet-input" class="form-label">Alphabet</label>
+                                <input type="text" class="form-control" id="alphabet-input"
+                                    value="abcdefghijklmnopqrstuvwxyz0123456789">
+                            </div>
+                            <div class="mb-3">
+                                <label for="letter-case" class="form-label">Letter Case</label>
+                                <select class="form-select" id="letter-case">
+                                    <option value="1">Maintain Case</option>
+                                    <option value="2">Lower Case</option>
+                                    <option value="3">Upper Case</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="foreign-chars" class="form-label">Foreign Characters</label>
+                                <select class="form-select" id="foreign-chars">
+                                    <option value="1">Remove</option>
+                                    <option value="2">Ignore</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        </form>
                     </div>
-                    <div class="column">
-                        <div><span>ALPHABET</span></div>
-                        <div>
-                            <input type="text" name="alphabet" id="alphabet-input"
-                                value="abcdefghijklmnopqrstuvwxyz0123456789" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <div>LETTER CASE</div>
-                            <select name="letter-case" id="letter-case">
-                                <option value="1">Maintain Case</option>
-                                <option value="2">Lower Case</option>
-                                <option value="3">Upper Case</option>
-                            </select>
-                        </div>
-                        <div>
-                            <div>FOREIGN CHARS</div>
-                            <select name="foreign-chars" id="foreign-chars">
-                                <option value="1">Remove</option>
-                                <option value="2">Ignore</option>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="submit" name="submit" id="submit" value="Submit" />
-                </form>
-            </div>
-            <div class="box">
-                <div class="heading">
-                    <h2 id="heading-input">Plaintext</h2>
                 </div>
-                <textarea placeholder="Enter plaintext" rows="80" id="input-text"></textarea>
-                <p id="status"></p>
             </div>
-            <div class="box">
-                <div class="heading">
-                    <h2 id="heading-output">Ciphertext</h2>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header bg-success text-white">
+                        Input
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" id="input-text" rows="5" placeholder="Enter plaintext"></textarea>
+                    </div>
                 </div>
-                <textarea readonly placeholder="Output" rows="80" id="output-text"></textarea>
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Output
+                    </div>
+                    <div class="card-body">
+                        <textarea class="form-control" id="output-text" rows="5" readonly placeholder="Output"></textarea>
+                        <button id="copy-button" class="btn btn-secondary mt-3 w-100">Copy to Clipboard</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Toast container for notifications -->
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
     <script src="caesar.js"></script>
 </body>
-<pre id="output"></pre>
 
 </html>
